@@ -10,7 +10,7 @@ URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
 Patch0:		wavplay-make+res.patch
 BuildRequires:	XFree86-devel
-BuildRequires:	lesstif-devel
+BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,7 +27,6 @@ Summary(pl):	Narzêdzie "xltwavplay"
 Group:		X11/Applications/Multimedia
 Group(pl):	X11/Aplikacje/Multimedia
 Requires:	%{name} = %{version}
-Requires:	lesstif
 Requires:	XFree86-libs
 
 %description X11
