@@ -1,5 +1,5 @@
 Summary:	play wav files under Linux
-Summary(pl):	Odtwarzacz plików d¼wiêkowe wav pod Linuksem
+Summary(pl):	Odtwarzacz plików d¼wiêkowych wav pod Linuksa
 Name:		wavplay
 Version:	1.4
 Release:	3
@@ -49,7 +49,7 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 %build
 rm -rf $RPM_BUILD_ROOT
 %{__make} \
-	OPT="$RPM_OPT_FLAGS" \
+	OPT="%{rpmcflags}" \
 	INSTDIR=%{_bindir}
 
 %install
