@@ -2,7 +2,7 @@ Summary:	play wav files under Linux
 Summary(pl):	Odtwarzacz plików d¼wiêkowych wav pod Linuksa
 Name:		wavplay
 Version:	1.4
-Release:	6
+Release:	7
 License:	GPL
 Group:		Applications/Sound
 URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
@@ -11,6 +11,7 @@ Patch0:		%{name}-make+res.patch
 Patch1:		%{name}-X11.patch
 Patch2:		%{name}-va_arg_fix.patch
 Patch3:		%{name}-types.patch
+Patch4:		%{name}-nonblock.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,6 +46,7 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 %patch1 -p1
 %patch2
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__make} \
