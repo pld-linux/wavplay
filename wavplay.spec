@@ -1,58 +1,81 @@
-Summary:	wavplay - play wav files under Linux
+Summary:	play wav files under Linux
+Summary(pl):	Odtwarzacz plików d¼wiêkowe wav pod Linuksem
 Name:		wavplay
-Version:	1.3
+Version:	1.4
 Release:	1
-Copyright:	GPL
+License:	GPL
 Group:		Applications/Sound
+Group(pl):	Aplikacje/D¼wiêk
 URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
-Source:		ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/wavplay-1.3.tar.gz
-Patch0:		wavplay-1.3.patch
-Patch1:		wavplay-install.patch
+Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
+Patch0:		wavplay-make+res.patch
+BuildRequires:	XFree86-devel
+BuildRequires:	lesstif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This version completely replaces wavplay-1.0 and its two patches.
+Wavplay is a simple command-line tool that allows to play WAV audio files
+under Linux
+
+%description -l pl
+Wavplay jest prostym narzêdziem które pozwala odtwarzaæ pliki d¼wiêkowe
+typu WAV pod Linuksem
 
 %package X11
-Summary: xltwavplay utility
-Group: Applications/Sound
+Summary:	xltwavplay utility
+Summary(pl):	Narzêdzie "xltwavplay"
+Group:		X11/Applications/Sound
+######		Unknown group!
+Requires:	%{name} = %{version}
+Requires:	lesstif
+Requires:	XFree86-libs
 
 %description X11
-The xltwavplay program now allows the user to point and click his way through
-the playing of selected wav files, changing of options and performing
-recordings.  
+The xltwavplay program now allows the user to point and click his way
+through the playing of selected wav files, changing of options and
+performing recordings.
+
+%description X11 -l pl
+Program xltwavplay pozwala u¿ytkownikowi szybko i ³atwo odgrywaæ wybrane
+pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p0
 
 %build
 rm -rf $RPM_BUILD_ROOT
-make "OPT=$RPM_OPT_FLAGS"
+make \
+	OPT="$RPM_OPT_FLAGS" \
+	INSTDIR=%{_bindir}
 
 %install
-install -d $RPM_BUILD_ROOT{%{_bindir},/usr/X11R6/bin,/usr/X11R6/lib/X11/app-defaults}
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
+rm -rf $RPM_BUILD_ROOT
 
-make install
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
+	$RPM_BUILD_ROOT%{_prefix}/X11R6/{bin,lib/X11/app-defaults}
+
+make install \
+	INSTDIR=$RPM_BUILD_ROOT%{_bindir} \
+	XINSTDIR=$RPM_BUILD_ROOT%{_prefix}/X11R6/bin \
+	RESDIR=$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults
 
 install wavplay.1 $RPM_BUILD_ROOT%{_mandir}/man1
-
 echo ".so wavplay.1" > $RPM_BUILD_ROOT%{_mandir}/man1/wavrec.1
 
-gzip -9nf README* NEW BUGS $RPM_BUILD_ROOT%{_mandir}/man1/*
+gzip -9nf README BUGS \
+	$RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
-%doc {README*,NEW,BUGS}.gz
-%{_mandir}/man1/*.gz
+%defattr(644,root,root,755)
+%doc *.gz
+%{_mandir}/man*/*
 %attr(755,root,root) %{_bindir}/wav*
 
 %files X11
-%defattr(644, root, root, 755)
-%config /usr/X11R6/lib/X11/app-defaults/xltwavplay
-%attr(755,root,root) /usr/X11R6/bin/xltwavplay
+%defattr(644,root,root,755)
+%config %{_prefix}/X11R6/lib/X11/app-defaults/xltwavplay
+%attr(755,root,root) %{_prefix}/X11R6/bin/xltwavplay
