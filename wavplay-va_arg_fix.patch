@@ -1,0 +1,11 @@
+--- menu.c~	Sat Dec  4 01:06:42 1999
++++ menu.c	Mon Jul  1 00:20:38 2002
+@@ -78,7 +78,7 @@
+ 	nameChoice = va_arg(ap,char *);
+ 
+ 	while ( nameChoice != NULL ) {
+-		menu_type = va_arg(ap,char);		/* Get 'M' or 'T' */
++		menu_type = (char)va_arg(ap,int);		/* Get 'M' or 'T' */
+ 		callback = va_arg(ap,XtCallbackProc);	/* Get callback address or NULL ptr */
+ 		wPointer = va_arg(ap,Widget *);		/* Get address so we can return widget */
+ 
