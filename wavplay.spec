@@ -1,4 +1,4 @@
-Summary:	play wav files under Linux
+Summary:	Play wav files under Linux
 Summary(pl):	Odtwarzacz plików d¼wiêkowych wav pod Linuksa
 Name:		wavplay
 Version:	1.4
