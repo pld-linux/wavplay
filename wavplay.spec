@@ -5,11 +5,12 @@ Version:	1.4
 Release:	3
 License:	GPL
 Group:		Applications/Sound
+Group(de):	Applikationen/Laut
 Group(pl):	Aplikacje/D¼wiêk
 URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
-Patch0:		wavplay-make+res.patch
-Patch1:		wavplay-X11.patch
+Patch0:		%{name}-make+res.patch
+Patch1:		%{name}-X11.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -26,6 +27,7 @@ d¼wiêkowe typu WAV pod Linuksem
 Summary:	xltwavplay utility
 Summary(pl):	Narzêdzie "xltwavplay"
 Group:		X11/Applications/Multimedia
+Group(de):	X11/Applikationen/Multimedia
 Group(pl):	X11/Aplikacje/Multimedia
 Requires:	%{name} = %{version}
 Requires:	XFree86-libs
