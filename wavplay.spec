@@ -45,7 +45,6 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 %patch2
 
 %build
-rm -rf $RPM_BUILD_ROOT
 %{__make} \
 	CC=%{__cc} \
 	OPT="%{rpmcflags}" \
