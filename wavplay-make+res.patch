@@ -41,7 +41,7 @@ diff -Naur wavplay-1.4/Makefile wavplay-1.4-p/Makefile
  # installed).
  #
 -#CUSTINCL= -I/usr/X11R6/include/X11 -I/usr/local/lesstif/include/Xm
-+CUSTINCL= -I/usr/X11R6/include/X11
++CUSTINCL= -I/usr/X11R6/include
  
  #----------------------------------------------------------------------
  # Normally, you shouldn't need to change anything beyond this point:
