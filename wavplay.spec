@@ -17,11 +17,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Wavplay is a simple command-line tool that allows to play WAV audio
-files under Linux
+files under Linux.
 
 %description -l pl
 Wavplay jest prostym narzêdziem które pozwala odtwarzaæ pliki
-d¼wiêkowe typu WAV pod Linuksem
+d¼wiêkowe typu WAV pod Linuksem.
 
 %package X11
 Summary:	xltwavplay utility
@@ -54,7 +54,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/{bin,lib/X11/app-defaults}
 
@@ -66,8 +65,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
 install wavplay.1 $RPM_BUILD_ROOT%{_mandir}/man1
 echo ".so wavplay.1" > $RPM_BUILD_ROOT%{_mandir}/man1/wavrec.1
 
-gzip -9nf README BUGS \
-	$RPM_BUILD_ROOT%{_mandir}/man1/*
+gzip -9nf README BUGS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
