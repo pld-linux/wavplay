@@ -26,7 +26,7 @@ d¼wiêkowe typu WAV pod Linuksem.
 %package X11
 Summary:	xltwavplay utility
 Summary(pl):	Narzêdzie "xltwavplay"
-Group:		X11/Applications/Multimedia
+Group:		X11/Applications/Sound
 Requires:	%{name} = %{version}
 Requires:	XFree86-libs
 
