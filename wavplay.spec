@@ -45,7 +45,7 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 
 %build
 rm -rf $RPM_BUILD_ROOT
-make \
+%{__make} \
 	OPT="$RPM_OPT_FLAGS" \
 	INSTDIR=%{_bindir}
 
@@ -55,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/{bin,lib/X11/app-defaults}
 
-make install \
+%{__make} install \
 	INSTDIR=$RPM_BUILD_ROOT%{_bindir} \
 	XINSTDIR=$RPM_BUILD_ROOT%{_prefix}/X11R6/bin \
 	RESDIR=$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults
