@@ -14,18 +14,18 @@ BuildRequires:	lesstif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Wavplay is a simple command-line tool that allows to play WAV audio files
-under Linux
+Wavplay is a simple command-line tool that allows to play WAV audio
+files under Linux
 
 %description -l pl
-Wavplay jest prostym narzêdziem które pozwala odtwarzaæ pliki d¼wiêkowe
-typu WAV pod Linuksem
+Wavplay jest prostym narzêdziem które pozwala odtwarzaæ pliki
+d¼wiêkowe typu WAV pod Linuksem
 
 %package X11
 Summary:	xltwavplay utility
 Summary(pl):	Narzêdzie "xltwavplay"
-Group:		X11/Applications/Sound
-######		Unknown group!
+Group:		X11/Applications/Multimedia
+Group(pl):	X11/Aplikacje/Multimedia
 Requires:	%{name} = %{version}
 Requires:	lesstif
 Requires:	XFree86-libs
@@ -36,8 +36,8 @@ through the playing of selected wav files, changing of options and
 performing recordings.
 
 %description X11 -l pl
-Program xltwavplay pozwala u¿ytkownikowi szybko i ³atwo odgrywaæ wybrane
-pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
+Program xltwavplay pozwala u¿ytkownikowi szybko i ³atwo odgrywaæ
+wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 
 %prep
 %setup -q
