@@ -8,7 +8,7 @@ URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 Source:		ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/wavplay-1.3.tar.gz
 Patch0:		wavplay-1.3.patch
 Patch1:		wavplay-install.patch
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This version completely replaces wavplay-1.0 and its two patches.
