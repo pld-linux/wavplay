@@ -1,0 +1,94 @@
+diff -Naur wavplay-1.4/main.c wavplay-1.4-p/main.c
+--- wavplay-1.4/main.c	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4-p/main.c	Mon May 12 19:56:20 2003
+@@ -101,6 +101,7 @@
+ 	printf("\t-%c\tLock for record.\n",OPF_RECD_LOCK);
+ 	printf("\t-%c\tUnlock for record.\n",OPF_RECD_UNLOCK);
+ 	printf("\t-%c dev\tOverride default of %s\n",OPF_DEVICE,AUDIODEV);
++	printf("\t-%c\tOpen device in non-blocking mode.\n",OPF_NONBLOCK);
+ 
+ 	if ( opr_mode != OprRecord )
+ 		printf("\t-%c\tDisplay info about wav file(s) only\n",OPF_INFO);
+@@ -212,7 +213,7 @@
+ 		OPF_INFO, OPF_HELP, OPF_QUIET, OPF_SAMPRATE,':', OPF_STEREO, OPF_MONO,
+ 		OPF_TIME,':', OPF_DATABITS,':', OPF_IPCKEY,':', OPF_RESET,
+ 		OPF_PLAY_LOCK, OPF_PLAY_UNLOCK, OPF_RECD_LOCK, OPF_RECD_UNLOCK,
+-		OPF_DEBUG, OPF_VERSION, OPF_DEVICE,':', 0 };
++		OPF_DEBUG, OPF_VERSION, OPF_DEVICE,':', OPF_NONBLOCK, 0 };
+ #ifndef USE_GETOPT_STD
+ 	int optx;				/* Option index */
+ 	char *cp;
+@@ -261,6 +262,10 @@
+ 		case OPF_DEVICE :		/* -d device_path */
+ 			env_AUDIODEV = optarg;	/* Override environment variable */
+ 			break;		
++		
++		case OPF_NONBLOCK :		/* -n ; non-blocking */
++			wavopts.NonBlock.optChar = (char) optch;
++			break;
+ 
+ 		case OPF_PLAY_LOCK :		/* -l ; lock play lock request */
+ 		case OPF_PLAY_UNLOCK :		/* -u ; unlock play lock request */
+diff -Naur wavplay-1.4/recplay.c wavplay-1.4-p/recplay.c
+--- wavplay-1.4/recplay.c	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4-p/recplay.c	Mon May 12 19:58:29 2003
+@@ -121,7 +121,10 @@
+ 			/*
+ 			 * If not -i mode, play the file:
+ 			 */
+-			if ( (dfile = OpenDSP(wfile,O_WRONLY,v_erf)) == NULL )
++			if ( (dfile = OpenDSP(wfile,O_WRONLY |
++				(wavopts->NonBlock.optChar == OPF_NONBLOCK
++				? O_NDELAY
++				: 0) ,v_erf)) == NULL )
+ 				goto errxit;
+ 
+ 			if ( PlayDSP(dfile,wfile,svr_work_proc,v_erf) )
+diff -Naur wavplay-1.4/wavplay.1 wavplay-1.4-p/wavplay.1
+--- wavplay-1.4/wavplay.1	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4-p/wavplay.1	Mon May 12 19:59:44 2003
+@@ -20,6 +20,7 @@
+ .RB [ -L ]
+ .RB [ -U ]
+ .RB [ -V, --version ]
++.RB [ -n ]
+ .RI [ input-files ]
+ .PP
+ .B wavrec
+@@ -41,6 +42,7 @@
+ .RB [ -L ]
+ .RB [ -U ]
+ .RB [ -V, --version ]
++.RB [ -n ]
+ .RI [ output-file ]
+ .PP
+ .SH DESCRIPTION
+@@ -113,6 +115,9 @@
+ .TP
+ .BI \--version
+ same as -V.
++.TP
++.BI \-n
++use non-blocking open() call on device.
+ 
+ .SH BUGS
+ .B wavplay
+diff -Naur wavplay-1.4/wavplay.h wavplay-1.4-p/wavplay.h
+--- wavplay-1.4/wavplay.h	Mon May 12 19:42:44 2003
++++ wavplay-1.4-p/wavplay.h	Mon May 12 19:54:59 2003
+@@ -147,6 +147,7 @@
+ #define OPF_RECD_UNLOCK	'U'			/* -U ; unlock record option */
+ #define OPF_DEBUG	'x'			/* -x ; debug option */
+ #define OPF_VERSION	'V'			/* -V ; version and copyright */
++#define OPF_NONBLOCK	'n'			/* -n ; open in non-blocking mode */
+ 
+ /*
+  * Types internal to wavplay, in an attempt to isolate ourselves from
+@@ -231,6 +232,7 @@
+ 	UInt32	Seconds;			/* Time limited to this many seconds, else zero */
+         UInt32  StartSample;                    /* Sample to start playback with */
+ 	int	ipc;				/* Semaphore IPC ID */
++	FlgOpt	NonBlock;			/* -n option flag */
+ } WavPlayOpts;
+ 
+ /*
