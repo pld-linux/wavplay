@@ -9,6 +9,7 @@ URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
 Patch0:		%{name}-make+res.patch
 Patch1:		%{name}-X11.patch
+Patch2:		%{name}-va_arg_fix.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -41,6 +42,7 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2
 
 %build
 rm -rf $RPM_BUILD_ROOT
