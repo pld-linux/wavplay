@@ -54,9 +54,12 @@ diff -Naur wavplay-1.4/Makefile wavplay-1.4-p/Makefile
  
  xltwavplay: $(CLNOBJ) xltwavplay.o
  	$(CC) $(CLNOBJ) $(XLDOPTS) $(DEBUG) -o xltwavplay
-@@ -217,7 +218,7 @@
+@@ -215,9 +216,9 @@
+ 
+ install_wavplay: wavplay wavrec
  	@[ ! -d "$(INSTDIR)" ] && echo "You do not have a directory $(INSTDIR); Check INSTDIR in make file." && exit 13 || :
- 	$(INSTALL) -o root -g root -m 555 wavplay $(INSTDIR)
+-	$(INSTALL) -o root -g root -m 555 wavplay $(INSTDIR)
++	$(INSTALL) wavplay $(INSTDIR)
  	rm -f $(INSTDIR)/wavrec
 -	ln $(INSTDIR)/wavplay $(INSTDIR)/wavrec
 +	ln -s wavplay $(INSTDIR)/wavrec
