@@ -2,7 +2,7 @@ Summary:	Play wav files under Linux
 Summary(pl):	Odtwarzacz plików d¼wiêkowych wav pod Linuksa
 Name:		wavplay
 Version:	1.4
-Release:	7
+Release:	8
 License:	GPL
 Group:		Applications/Sound
 URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
@@ -17,6 +17,8 @@ BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
+
 %description
 Wavplay is a simple command-line tool that allows to play WAV audio
 files under Linux.
@@ -29,8 +31,7 @@ d¼wiêkowe typu WAV pod Linuksem.
 Summary:	xltwavplay utility
 Summary(pl):	Narzêdzie "xltwavplay"
 Group:		X11/Applications/Sound
-Requires:	%{name} = %{version}
-Requires:	XFree86-libs
+Requires:	%{name} = %{version}-%{release}
 
 %description X11
 The xltwavplay program now allows the user to point and click his way
@@ -53,17 +54,17 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 %{__make} \
 	CC=%{__cc} \
 	OPT="%{rpmcflags}" \
+	XLDOPTS="-L/usr/X11R6/%{_lib} -lXm -lXmu -lXt -lX11" \
 	INSTDIR=%{_bindir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT%{_prefix}/X11R6/{bin,lib/X11/app-defaults}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_appdefsdir}}
 
 %{__make} install \
 	INSTDIR=$RPM_BUILD_ROOT%{_bindir} \
-	XINSTDIR=$RPM_BUILD_ROOT%{_prefix}/X11R6/bin \
-	RESDIR=$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults
+	XINSTDIR=$RPM_BUILD_ROOT%{_bindir} \
+	RESDIR=$RPM_BUILD_ROOT%{_appdefsdir}
 
 install wavplay.1 $RPM_BUILD_ROOT%{_mandir}/man1
 echo ".so wavplay.1" > $RPM_BUILD_ROOT%{_mandir}/man1/wavrec.1
@@ -74,10 +75,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README BUGS
-%{_mandir}/man*/*
 %attr(755,root,root) %{_bindir}/wav*
+%{_mandir}/man*/*
 
 %files X11
 %defattr(644,root,root,755)
-%config %{_prefix}/X11R6/lib/X11/app-defaults/xltwavplay
-%attr(755,root,root) %{_prefix}/X11R6/bin/xltwavplay
+%attr(755,root,root) %{_bindir}/xltwavplay
+%{_appdefsdir}/xltwavplay
