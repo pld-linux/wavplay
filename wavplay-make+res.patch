@@ -1,0 +1,105 @@
+diff -Naur wavplay-1.4/Makefile wavplay-1.4-p/Makefile
+--- wavplay-1.4/Makefile	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4-p/Makefile	Tue May 30 23:16:01 2000
+@@ -38,7 +38,7 @@
+ #----------------------------------------------------------------------
+ # If you are running a 386 you should comment this line out.
+ #
+-CPU=-m486
++#CPU=-m486
+ 
+ #----------------------------------------------------------------------
+ # If you are experiencing troubles (like core dumps!), then uncomment
+@@ -47,7 +47,7 @@
+ # adjust the STRIP option to suit compile mode:
+ #
+ #DEBUG=-g
+-OPT=-O2
++#OPT=-O2
+ 
+ #----------------------------------------------------------------------
+ # When using 'DEBUG=-g' above, then comment out the 'strip' line:
+@@ -60,6 +60,7 @@
+ # placed (wavplay, wavrec, and xltwavplay)
+ #
+ INSTDIR=/usr/local/bin
++XINSTDIR=/usr/X11R6/bin
+ 
+ #----------------------------------------------------------------------
+ # Uncomment this line if you want to install the xltwavplay.res resource
+@@ -67,7 +68,7 @@
+ # builtin fallback resources in the program itself. If you don't know
+ # what this is all about, then leave the next line commented out.
+ #
+-#USERES=-DINSTALLED_RESOURCE_FILE
++USERES=-DINSTALLED_RESOURCE_FILE
+ 
+ #----------------------------------------------------------------------
+ # If the resource file is to be installed, indicate where. If the above
+@@ -163,7 +164,7 @@
+ # this should be unecessary if the appropriate symlinks are
+ # installed).
+ #
+-#CUSTINCL= -I/usr/X11R6/include/X11 -I/usr/local/lesstif/include/Xm
++CUSTINCL= -I/usr/X11R6/include/X11
+ 
+ #----------------------------------------------------------------------
+ # Normally, you shouldn't need to change anything beyond this point:
+@@ -202,7 +203,7 @@
+ 
+ wavrec:	wavplay
+ 	rm -f wavrec
+-	ln wavplay wavrec
++	ln -s wavplay wavrec
+ 
+ xltwavplay: $(CLNOBJ) xltwavplay.o
+ 	$(CC) $(CLNOBJ) $(XLDOPTS) $(DEBUG) -o xltwavplay
+@@ -217,7 +218,7 @@
+ 	@[ ! -d "$(INSTDIR)" ] && echo "You do not have a directory $(INSTDIR); Check INSTDIR in make file." && exit 13 || :
+ 	$(INSTALL) -o root -g root -m 555 wavplay $(INSTDIR)
+ 	rm -f $(INSTDIR)/wavrec
+-	ln $(INSTDIR)/wavplay $(INSTDIR)/wavrec
++	ln -s wavplay $(INSTDIR)/wavrec
+ 	@[ ! -z "$(SCHED_PRIORITY)" ] && echo "*** DO 'make setuid_root' IF YOU WANT REAL TIME SCHEDULING ***" || :
+ 	@echo
+ 
+@@ -234,11 +235,9 @@
+ 	@echo
+ 
+ install_xltwavplay: xltwavplay
+-	$(INSTALL) -o root -g root -m 555 xltwavplay $(INSTDIR)
++	$(INSTALL) xltwavplay $(XINSTDIR)
+ 	@[ ! -z "$(USERES)" ] \
+-		&& $(INSTALL) -o root -g root -m 555 xltwavplay.res $(RESDIR)/xltwavplay \
+-		&& ls -dlL $(RESDIR)/xltwavplay/xltwavplay.res \
+-		|| rm -f $(RESDIR)/xltwavplay
++		&& $(INSTALL) xltwavplay.res $(RESDIR)/xltwavplay
+ 
+ clean:
+ 	rm -f *.o a.out core t.t errs.t
+diff -Naur wavplay-1.4/xltwavplay.res wavplay-1.4-p/xltwavplay.res
+--- wavplay-1.4/xltwavplay.res	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4-p/xltwavplay.res	Tue May 30 23:18:57 2000
+@@ -31,17 +31,17 @@
+ xltwavplay*TimeLbl0.labelString: Duration:
+ xltwavplay*FileLbl1.labelString: \                                                            
+ xltwavplay*FileLbl1.foreground: black
+-xltwavplay*TypeLbl1.labelString: 
++xltwavplay*TypeLbl1.labelString: \                                                            
+ xltwavplay*TypeLbl1.foreground: black
+-xltwavplay*DateLbl1.labelString: 
++xltwavplay*DateLbl1.labelString: \                                                            
+ xltwavplay*DateLbl1.foreground: black
+-xltwavplay*SizeLbl1.labelString: 
++xltwavplay*SizeLbl1.labelString: \                                                            
+ xltwavplay*SizeLbl1.foreground: black
+ xltwavplay*SamplingRateLbl1.labelString: 
+ xltwavplay*SamplingRateLbl1.foreground: black
+-xltwavplay*SamplesLbl1.labelString: 
++xltwavplay*SamplesLbl1.labelString: \                                                            
+ xltwavplay*SamplesLbl1.foreground: black
+-xltwavplay*TimeLbl1.labelString: 
++xltwavplay*TimeLbl1.labelString: \                                                            
+ xltwavplay*TimeLbl1.foreground: black
+ xltwavplay*Play.labelString: Play
+ xltwavplay*StopPlay.labelString: Stop
