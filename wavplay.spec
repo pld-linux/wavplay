@@ -2,11 +2,13 @@ Summary:	play wav files under Linux
 Summary(pl):	Odtwarzacz plików d¼wiêkowych wav pod Linuksa
 Name:		wavplay
 Version:	1.4
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Sound
 Group(de):	Applikationen/Laut
+Group(es):	Aplicaciones/Sonido
 Group(pl):	Aplikacje/D¼wiêk
+Group(pt_BR):	Aplicações/Som
 URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
 Patch0:		%{name}-make+res.patch
@@ -49,6 +51,7 @@ wybrane pliki wav, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 %build
 rm -rf $RPM_BUILD_ROOT
 %{__make} \
+	CC=%{__cc} \
 	OPT="%{rpmcflags}" \
 	INSTDIR=%{_bindir}
 
