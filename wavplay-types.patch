@@ -1,0 +1,94 @@
+diff -Nur wavplay-1.4.orig/wavfile.c wavplay-1.4/wavfile.c
+--- wavplay-1.4.orig/wavfile.c	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4/wavfile.c	Fri Aug 16 12:31:44 2002
+@@ -36,6 +36,7 @@
+  */	
+ static const char rcsid[] = "@(#)wavfile.c $Revision$";
+ 
++#include	<stdint.h>
+ #include  	<stdio.h>
+ #include	<errno.h>
+ #include	<sys/types.h>
+@@ -51,29 +52,29 @@
+ #define		FALSE			0
+ 
+ typedef  struct
+-{	u_long     dwSize ;
+-	u_short    wFormatTag ;
+-	u_short    wChannels ;
+-	u_long     dwSamplesPerSec ;
+-	u_long     dwAvgBytesPerSec ;
+-	u_short    wBlockAlign ;
+-	u_short    wBitsPerSample ;
++{	uint32_t   dwSize ;
++	uint16_t   wFormatTag ;
++	uint16_t   wChannels ;
++	uint32_t   dwSamplesPerSec ;
++	uint32_t   dwAvgBytesPerSec ;
++	uint16_t   wBlockAlign ;
++	uint16_t   wBitsPerSample ;
+ } WAVEFORMAT ;
+ 
+ typedef  struct
+ {	char    	RiffID [4] ;
+-	u_long    	RiffSize ;
++	uint32_t  	RiffSize ;
+ 	char    	WaveID [4] ;
+ 	char    	FmtID  [4] ;
+-	u_long    	FmtSize ;
+-	u_short   	wFormatTag ;
+-	u_short   	nChannels ;
+-	u_long		nSamplesPerSec ;
+-	u_long		nAvgBytesPerSec ;
+-	u_short		nBlockAlign ;
+-	u_short		wBitsPerSample ;
++	uint32_t  	FmtSize ;
++	uint16_t  	wFormatTag ;
++	uint16_t  	nChannels ;
++	uint32_t	nSamplesPerSec ;
++	uint32_t	nAvgBytesPerSec ;
++	uint16_t	nBlockAlign ;
++	uint16_t	wBitsPerSample ;
+ 	char		DataID [4] ;
+-	u_long		nDataBytes ;
++	uint32_t	nDataBytes ;
+ } WAVE_HEADER ;
+ 
+ /*=================================================================================================*/
+@@ -183,7 +184,7 @@
+ 	ptr += 4 ;	/* Move past "fmt ".*/
+ 	memcpy (&waveformat, ptr, sizeof (WAVEFORMAT)) ;
+ 
+-	if (waveformat.dwSize < (sizeof (WAVEFORMAT) - sizeof (u_long))) {
++	if (waveformat.dwSize < (sizeof (WAVEFORMAT) - sizeof (uint32_t))) {
+ 		err("Bad format: Bad fmt size");			/* wwg: report error */
+ 		return  WR_BADFORMATSIZE ;
+ 	}
+diff -Nur wavplay-1.4.orig/wavplay.h wavplay-1.4/wavplay.h
+--- wavplay-1.4.orig/wavplay.h	Sat Dec  4 01:06:42 1999
++++ wavplay-1.4/wavplay.h	Fri Aug 16 11:49:54 2002
+@@ -61,6 +61,7 @@
+ #define WAVPLAY_VERSION		"1.4"
+ 
+ #include <stdarg.h>
++#include <stdint.h>
+ #include <sys/types.h>
+ #include <sys/ipc.h>
+ #include <sys/stat.h>
+@@ -151,11 +152,11 @@
+  * Types internal to wavplay, in an attempt to isolate ourselves from
+  * a dependance on a particular platform.
+  */
+-typedef unsigned char Byte;
+-typedef short Int16;
+-typedef long Int32;
+-typedef unsigned long UInt32;
+-typedef unsigned short UInt16;
++typedef uint8_t Byte;
++typedef int16_t Int16;
++typedef int32_t Int32;
++typedef uint32_t UInt32;
++typedef uint16_t UInt16;
+ 
+ /*
+  * This value sets buffer sizes for temporary buffers that sprintf()
