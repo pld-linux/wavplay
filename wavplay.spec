@@ -5,7 +5,6 @@ Version:	1.4
 Release:	9
 License:	GPL
 Group:		Applications/Sound
-URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
 # Source0-md5:	726c58f47c0dbc3b58ff6c42300d518e
 Patch0:		%{name}-make+res.patch
@@ -13,6 +12,7 @@ Patch1:		%{name}-X11.patch
 Patch2:		%{name}-va_arg_fix.patch
 Patch3:		%{name}-types.patch
 Patch4:		%{name}-nonblock.patch
+URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
