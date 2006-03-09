@@ -52,7 +52,7 @@ wybrane pliki WAV, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
 
 %build
 %{__make} \
-	CC=%{__cc} \
+	CC="%{__cc}" \
 	OPT="%{rpmcflags}" \
 	XLDOPTS="-L/usr/X11R6/%{_lib} -lXm -lXmu -lXt -lX11" \
 	INSTDIR=%{_bindir}
