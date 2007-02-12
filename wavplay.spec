@@ -1,5 +1,5 @@
 Summary:	Play WAV files under Linux
-Summary(pl.UTF-8):   Odtwarzacz plików dźwiękowych WAV pod Linuksa
+Summary(pl.UTF-8):	Odtwarzacz plików dźwiękowych WAV pod Linuksa
 Name:		wavplay
 Version:	1.4
 Release:	9
@@ -29,7 +29,7 @@ dźwiękowe typu WAV pod Linuksem.
 
 %package X11
 Summary:	xltwavplay utility
-Summary(pl.UTF-8):   Narzędzie "xltwavplay"
+Summary(pl.UTF-8):	Narzędzie "xltwavplay"
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
