@@ -1,5 +1,5 @@
 Summary:	Play WAV files under Linux
-Summary(pl):	Odtwarzacz plików d¼wiêkowych WAV pod Linuksa
+Summary(pl.UTF-8):   Odtwarzacz plikÃ³w dÅºwiÄ™kowych WAV pod Linuksa
 Name:		wavplay
 Version:	1.4
 Release:	9
@@ -23,13 +23,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Wavplay is a simple command-line tool that allows to play WAV audio
 files under Linux.
 
-%description -l pl
-Wavplay jest prostym narzêdziem które pozwala odtwarzaæ pliki
-d¼wiêkowe typu WAV pod Linuksem.
+%description -l pl.UTF-8
+Wavplay jest prostym narzÄ™dziem ktÃ³re pozwala odtwarzaÄ‡ pliki
+dÅºwiÄ™kowe typu WAV pod Linuksem.
 
 %package X11
 Summary:	xltwavplay utility
-Summary(pl):	Narzêdzie "xltwavplay"
+Summary(pl.UTF-8):   NarzÄ™dzie "xltwavplay"
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
@@ -38,9 +38,9 @@ The xltwavplay program now allows the user to point and click his way
 through the playing of selected WAV files, changing of options and
 performing recordings.
 
-%description X11 -l pl
-Program xltwavplay pozwala u¿ytkownikowi szybko i ³atwo odgrywaæ
-wybrane pliki WAV, zmieniaæ ustawienia oraz nagrywaæ w³asne pliki.
+%description X11 -l pl.UTF-8
+Program xltwavplay pozwala uÅ¼ytkownikowi szybko i Å‚atwo odgrywaÄ‡
+wybrane pliki WAV, zmieniaÄ‡ ustawienia oraz nagrywaÄ‡ wÅ‚asne pliki.
 
 %prep
 %setup -q
