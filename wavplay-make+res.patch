@@ -23,7 +23,7 @@ diff -Naur wavplay-1.4/Makefile wavplay-1.4-p/Makefile
  # placed (wavplay, wavrec, and xltwavplay)
  #
  INSTDIR=/usr/local/bin
-+XINSTDIR=/usr/X11R6/bin
++XINSTDIR=/usr/bin
  
  #----------------------------------------------------------------------
  # Uncomment this line if you want to install the xltwavplay.res resource
@@ -41,7 +41,7 @@ diff -Naur wavplay-1.4/Makefile wavplay-1.4-p/Makefile
  # installed).
  #
 -#CUSTINCL= -I/usr/X11R6/include/X11 -I/usr/local/lesstif/include/Xm
-+CUSTINCL= -I/usr/X11R6/include
++CUSTINCL= -I/usr/include/X11
  
  #----------------------------------------------------------------------
  # Normally, you shouldn't need to change anything beyond this point:
