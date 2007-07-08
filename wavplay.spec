@@ -14,13 +14,13 @@ Patch3:		%{name}-types.patch
 Patch4:		%{name}-nonblock.patch
 Patch5:		%{name}-WavOpenForWrite.patch
 URL:		http://www.vaxxine.com/ve3wwg/gnuwave.html
+BuildRequires:	motif-devel
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXmu-devel
 BuildRequires:	xorg-lib-libXt-devel
-BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	motif-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
+%define		_appdefsdir	/usr/share/app-defaults
 
 %description
 Wavplay is a simple command-line tool that allows to play WAV audio
@@ -35,6 +35,7 @@ Summary:	xltwavplay utility
 Summary(pl.UTF-8):	Narzędzie "xltwavplay"
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{version}-%{release}
+Requires:	xorg-lib-libXt >= 1.0.0
 
 %description X11
 The xltwavplay program now allows the user to point and click his way
@@ -58,7 +59,7 @@ wybrane pliki WAV, zmieniać ustawienia oraz nagrywać własne pliki.
 %{__make} \
 	CC="%{__cc}" \
 	OPT="%{rpmcflags}" \
-	XLDOPTS="-L/usr/X11R6/%{_lib} -lXm -lXmu -lXt -lX11" \
+	XLDOPTS="-lXm -lXmu -lXt -lX11" \
 	INSTDIR=%{_bindir}
 
 %install
@@ -80,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README BUGS
 %attr(755,root,root) %{_bindir}/wav*
-%{_mandir}/man*/*
+%{_mandir}/man1/wav*
 
 %files X11
 %defattr(644,root,root,755)
