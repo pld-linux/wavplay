@@ -2,7 +2,7 @@ Summary:	Play WAV files under Linux
 Summary(pl.UTF-8):	Odtwarzacz plików dźwiękowych WAV pod Linuksa
 Name:		wavplay
 Version:	1.4
-Release:	11
+Release:	12
 License:	GPL
 Group:		Applications/Sound
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/players/%{name}-%{version}.tar.gz
@@ -20,7 +20,7 @@ BuildRequires:	xorg-lib-libXmu-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdefsdir	/usr/share/app-defaults
+%define		_appdefsdir		/usr/share/X11/app-defaults
 
 %description
 Wavplay is a simple command-line tool that allows to play WAV audio
