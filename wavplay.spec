@@ -48,12 +48,12 @@ wybrane pliki WAV, zmieniać ustawienia oraz nagrywać własne pliki.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
 
 %build
 %{__make} \
